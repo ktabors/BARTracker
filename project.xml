@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<widget xmlns="http://samsung.widgetsdk.uievolution.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="com.kyle.taborski.bartracker" name="bartracker" xsi:schemaLocation="http://samsung.widgetsdk.uievolution.com .settings/projectConfig.xsd ">
+    <description></description>
+    <version>1.0</version>
+    <width>372</width>
+    <height>367</height>
+    <icon>icon.png</icon>
+    <main>index.html</main>
+    <network>true</network>
+    <dockable>true</dockable>
+    <modes>dock,application</modes>
+    <defaultMode>fullscreen</defaultMode>
+</widget>

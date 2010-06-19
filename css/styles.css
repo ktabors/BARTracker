@@ -1,0 +1,33 @@
+body { font-family: sans-serif; font-size: 18px; margin: 0; padding: 0; background-color: transparent; width: 372px; /*height: 512px;*/  }
+#appTitle { background:url('../images/background_row.png'); background-repeat:repeat-x; height: 64px; margin: 0 5px; padding-left: 15px; }
+#closeButton { margin: 7px 20px 0 0; display:none; }
+#bgDiv { background: #FBF5CE; }
+#advisorLink { background:url('../images/background_row.png'); background-repeat:repeat-x; height: 64px; }
+#etaLink { background:url('../images/background_row.png'); background-repeat:repeat-x; height: 64px; }
+#infoLink { background:url('../images/background_row.png'); background-repeat:repeat-x; height: 64px; }
+.titleImages { float: left; margin-top: 19px; }
+dl { margin: 0; }
+dd { margin: 0; }
+dt { background-color: #174569; font-size: 36px; padding: 0 15px; margin: 0 5px; }
+dt a, dt a:visited { color: #FFF; text-decoration: none; margin: 4px 0 0; }
+dt img { margin-top: 5px; }
+#reloadEta { display: none; }
+#reloadAdv {  }
+li.stationList a:hover { text-decoration: underline; }
+dd a { color: #000; }
+#adviseList { height: 101px; }
+#adviseItemList { max-height: 91px; min-height: 91px; }
+ul { list-style: none; padding: 5px 10px; max-height: 524px; min-height: 524px; overflow: auto; margin: 0; margin-right: 6px; }
+#etaItemList { max-height: 478px; min-height: 478px; }
+dd p { margin:5px 0 0 25px; }
+li a { text-decoration: underline; }
+dd hr { border: 0; border-bottom: 1px dashed #03406A; width: 90%; margin-bottom: 8px; height: 0; }
+dd a { text-decoration: none; }
+.locPho { margin-left: 50px; }
+.etaTime { margin: 10px 0 8px 5px; text-align: center; width: 424px; }
+hr.etaTime { margin-bottom: 8px; margin-top: 8px; border: 0; border-bottom: 1px solid #03406A; width: 430px; height: 0; }
+img { float: right; }
+li.stationList { font-size: 22px; padding-top: 8px; }
+li.stationList a { width: 100%; }
+.lrborder { height: 357px; width: 5px; }
+.tbborder { height: 5px; }

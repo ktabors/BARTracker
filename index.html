@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title>BARTracker</title>
+        <link href="css/styles.css" type="text/css" rel="stylesheet" />
+    </head>
+  <body id="body">
+    <div id="content">
+      <img src="images/border_top.png" alt="border" width="100%" class="tbborder" />
+      <div style="clear: both;"></div>
+      <img src="images/border_left.png" alt="border" style="float:left;" class="lrborder" />
+      <img src="images/border_right.png" alt="border" style="float: right;" class="lrborder" />
+      <div id="bgDiv">
+        <div id="appTitle"><img src="images/bartracker.png" alt="BARTracker" height="25" width="127" class="titleImages" /><img id="closeButton" src="images/close_button.png" width="55" width="55" border="0" onclick="minFullScreen();"/></div>
+        <dl>
+            <dt id="advisorLink"><img src="images/advisors.png" alt="Advisories" height="25" width="117" class="titleImages" /><img id="reloadAdv" src="images/refresh_button.png" width="55" width="55" border="0" onclick="loadAdvisories()"/></dt>
+            <dd id="adviseList">
+                <ul id="adviseItemList">
+                    <li>Loading...</li>
+                </ul>
+            </dd>
+            <dt id="etaLink"><img src="images/station_etas.png" alt="Station ETAs" height="25" width="140" class="titleImages" /><img id="reloadEta" src="images/refresh_button.png" width="55" width="55" border="0" onclick="loadEtas()"/></dt>
+            <dd id="stationList">
+                <p class="etaTime">Station ETAs loaded at: <span id="stationListTime"></span></p>
+                <hr class="etaTime"/>
+                <ul id="etaItemList">
+                    <li>Loading...</li>
+                </ul>
+            </dd>
+            <dt id="infoLink"><img src="images/info.png" alt="Info" height="25" width="42" class="titleImages" /></dt>
+            <dd>
+                <ul>
+                    <li><a>BART Police</a>
+                        <p>Emergency: 911<br/>
+                            Toll-free: (877) 679-7000</p></li>
+                    <hr/>
+                    <li><a>Customer Service Representatives</a>
+                        <p>Monday-Friday 8:30am to 5:00pm<br/>
+                        24/7 voice mail: (510) 464-7134</p></li>
+                    <hr/>
+                    <li><a>Transit Information Center</a>
+                        <p>Local Telephone Numbers<br/>
+                        7 days a week 6:00am - 11:00pm</p>
+                        <p class="locPho">Oakland, Berkeley, San Leandro<br/>
+                        (510) 465-2278</p>
+                        <p class="locPho">San Francisco, Daly City<br/>
+                        (415) 989-2278</p>
+                        <p class="locPho">South San Francisco, San Bruno, San Mateo<br/>
+                        (650) 992-2278</p>
+                        <p class="locPho">Concord, Walnut Creek, Lafayette, Antioch, Pittsburg, Livermore, Orinda<br/>
+                        (925) 676-2278</p>
+                        <p class="locPho">Hayward, San Leandro, Fremont, Union City, Dublin, Pleasanton<br/>
+                        (510 441-2278</p>
+                        <p class="locPho">Richmond, El Cerrito<br/>
+                        (510) 236-2278</p>
+                    </li>
+                </ul>
+            </dd>
+        </dl>
+      </div>
+      <div style="clear: both;"></div>
+      <img src="images/border_bottom.png" alt="border" width="100%" class="tbborder" />
+    </div>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/network.js"></script>
+<script type="text/javascript" src="js/utility.js"></script>
+<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        // hide everything, but the first element which is the advisors, then load them
+    	$("dd:not(:first)").hide();
+        loadAdvisories();
+        
+        // if a dt is clicked on it's slide time
+        $("dt").click(function(){
+            // don't slide or do anything else if the clicked on is the selected
+            if( $(this).attr("id") != $("dd:visible").prev().attr( "id" )  ) {
+          	  $("dd:visible").slideUp("slow");
+              $(this).next().slideDown("slow");    
+            
+              // if its not the advisorList show the close button and hide the reload and vice versa
+              if( $(this).attr("id") != 'advisorLink' ) {
+            	  widgetFullScreen();
+              } else {
+                  minFullScreen();
+              }
+
+              // if its the etaList show the reload button
+              if( $(this).attr("id") != 'etaLink' ) {
+                $('#reloadEta').hide();
+              } else {
+            	loadEtas();
+            	$('#reloadEta').show();
+              }
+            }
+            return false;
+        });
+    });
+</script>
+
+  </body>
+</html>
