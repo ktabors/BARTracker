@@ -35,22 +35,19 @@ function showStatus(text) {
 }
 
 /**
+ * For resizing the left and right border images on startup or after sliding up/down.
+ */
+function sideImageResize() {
+	$('.lrborder').height(300); // to fix the document height after showing stations
+    $('.lrborder').height( $('#body').height()-5);
+}
+
+/**
  * Makes the widget full screen and does some button management.
  */
 function widgetFullScreen() {
-	// move the app to the upper corner and resize
-	try {   
-        window.moveTo(0,0);
-    }
-    catch(e) {}
-
-    resizeWindow( 480, 800 );
-    $('#body').width(480);
-    $('#body').height(795);
-    $('.lrborder').height(790);
-
     // button management
-    $('#closeButton').show();
+    //$('#closeButton').show();
 	$('#reloadAdv').hide();
 }
 
@@ -59,21 +56,15 @@ function widgetFullScreen() {
  */
 function minFullScreen() {
 	// button management
-	$('#closeButton').hide();
+	//$('#closeButton').hide();
 	$('#reloadAdv').show();
 	$('#reloadEta').hide();
 	
 	// hide all ETA or Info data and show the advisories
 	$("dd:not(:first)").hide();
-	$("dd:first").slideDown("slow");
+	$("dd:first").slideDown("slow", function(){ sideImageResize(2); });
 	
-	// resize the widget
-	resizeWindow( 372, 367 );
-	$('#body').width(372);
-	$('#body').height(367);
-	$('.lrborder').height(357);
-	
-	window.location.reload(false);
+	//window.location.reload(false);
 }
 
 /**
@@ -101,6 +92,8 @@ function iterateAdvisoryXML(xmlDoc) {
 	var channel = xmlDoc.getElementsByTagName('channel').item(0);	
 	var items = channel.getElementsByTagName('item');
 
+	//var items = xmlDoc.getElementsByTagName('item');
+	
 	bAdvisories = new Array();
 	for ( var i = 0; i < items.length; i++) {
 		var itemTitle = items[i].getElementsByTagName('title').item(0).firstChild.data;
@@ -143,6 +136,8 @@ function iterateAdvisoryXML(xmlDoc) {
 	}
 
 	container.appendChild(itemList);
+	
+	sideImageResize();
 }
 
 /**
@@ -209,8 +204,8 @@ function iterateEtaXML(xmlDoc) {
 	$("li.stationList a").click(function(){
 		// don't slide if the clicked on is the selected
         if( $(this).attr( "id" ) != $("li.stationList div:visible").prev().attr( "id" )  ) {
-          $("li.stationList div:visible").slideUp("slow");
-          $(this).next().slideDown("slow");
+          $("li.stationList div:visible").slideUp("slow", function(){ sideImageResize(); });
+          $(this).next().slideDown("slow", function(){ sideImageResize(); });
 		}
     });
 }

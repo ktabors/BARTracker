@@ -3,6 +3,7 @@
     <head>
         <title>BARTracker</title>
         <link href="css/styles.css" type="text/css" rel="stylesheet" />
+        <meta name="viewport" content="width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
     </head>
   <body id="body">
     <div id="content">
@@ -65,6 +66,7 @@
 <script type="text/javascript" src="js/network.js"></script>
 <script type="text/javascript" src="js/utility.js"></script>
 <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.xdomainajax.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         // hide everything, but the first element which is the advisors, then load them
@@ -75,8 +77,8 @@
         $("dt").click(function(){
             // don't slide or do anything else if the clicked on is the selected
             if( $(this).attr("id") != $("dd:visible").prev().attr( "id" )  ) {
-          	  $("dd:visible").slideUp("slow");
-              $(this).next().slideDown("slow");    
+          	  $("dd:visible").slideUp("slow", function(){ sideImageResize(); });
+              $(this).next().slideDown("slow", function(){ sideImageResize(); });    
             
               // if its not the advisorList show the close button and hide the reload and vice versa
               if( $(this).attr("id") != 'advisorLink' ) {
@@ -97,6 +99,5 @@
         });
     });
 </script>
-
   </body>
 </html>

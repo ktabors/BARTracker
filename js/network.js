@@ -21,7 +21,7 @@ function getXMLHttpRequest() {
 }
 
 /**
- * Make a request for an XML document.
+ * Make a request for an XML document. Switched to YQL and jQuery to get around cross site scripting.
  * 
  * @param url
  *            the url for the 'GET' call
@@ -31,46 +31,14 @@ function getXMLHttpRequest() {
  *            a call-back for request failure
  */
 function requestXML(url, onSuccess, onError) {
-	var req = getXMLHttpRequest();
-	if (isNetworkAvailable() && req) {
-		try {
-			// Support debugging using Firefox/Firebug
-			try {
-				netscape.security.PrivilegeManager.enablePrivilege("UniversalBrowserRead");
-			}
-			catch (e) {
-				// ...silently fails in all other browsers.
-			}
-			req.open('GET', url, true);
-			
-			// request XML data - make sure responseXML holds response 
-			req.setRequestHeader("Content-type", "text/xml");
-			
-			// anonymous call-back function tracking state changes
-			req.onreadystatechange = function() {
-				if (req.readyState != 4) {
-					return;
-				}
-				if (req.status == 200) {
-					onSuccess(req.responseXML);
-				}
-				else {
-					onError("RSS data unavailable " + req.statusText);
-				}
-			};
-			
-			// make the request
-			req.send(null);
-		}
-		catch (e) {
-			if (onError) {
-				onError("cannot make request");
-			}
-		}
-	}
-	else {
-		if (onError) {
-			onError("network not available");
-		}
-	}
+	$.ajax({
+	    url: url,
+	    type: 'GET',
+	    success: function(res) {
+	        onSuccess((new DOMParser()).parseFromString(res.responseText, "text/xml"));
+	    },
+	      error: function(xhr, textStatus, errorThrown){
+	    	  onError("RSS data unavailable -" + textStatus + "- " + xhr.readyState + " - " + xhr.status + " - " + xhr.responseText + " - " + errorThrown + " - " +  url );
+	      }
+	});
 }
